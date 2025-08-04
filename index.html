@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dalian Hong Xiang International Trade - Swimwear Manufacturer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(30, 61, 114, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-weight: normal;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: #87ceeb;
+        }
+
+        .nav-item a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        /* Page System */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 80px;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Home Page */
+        .home-page {
+            background: linear-gradient(135deg, #1e3d72, #2c5aa0, #4da6ff);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><circle fill="rgba(255,255,255,0.05)" cx="200" cy="200" r="100"/><circle fill="rgba(255,255,255,0.03)" cx="800" cy="300" r="150"/><circle fill="rgba(255,255,255,0.04)" cx="1000" cy="600" r="80"/><path fill="rgba(255,255,255,0.02)" d="M0 600c200-50 400 50 600 0s400-50 600 0v200H0z"/></svg>') no-repeat center center;
+            background-size: cover;
+        }
+
+        .home-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .home-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .home-content .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .video-showcase {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: rgba(255,255,255,0.8);
+            border: 2px dashed rgba(255,255,255,0.3);
+        }
+
+        .video-placeholder p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .video-frame {
+            width: 100%;
+            height: 500px;
+            border: none;
+            display: none;
+        }
+
+        /* About Page */
+        .about-page {
+            background: linear-gradient(to bottom, #f8feff, white);
+            padding: 4rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #2c5aa0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .about-text h3 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .company-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Products Page */
+        .products-page {
+            background: white;
+            padding: 4rem 0;
+        }
+
+        .product-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, #f8feff, white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+        }
+
+        .category-image {
+            height: 300px;
+            background: linear-gradient(45deg, #87ceeb, #4da6ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent);
+        }
+
+        .category-info {
+            padding: 2.5rem;
+        }
+
+        .category-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c5aa0;
+        }
+
+        .category-info p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list {
+            list-style: none;
+        }
+
+        .features-list li {
+            padding: 0.3rem 0;
+            color: #555;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: #4da6ff;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Contact Page */
+        .contact-page {
+            background: linear-gradient(135deg, #2c5aa0, #1e3d72);
+            color: white;
+            padding: 4rem 0;
+            min-height: calc(100vh - 80px);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .company-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            line-height: 1.3;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-icon {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            margin-top: 0.2rem;
+        }
+
+        .contact-details {
+            flex: 1;
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.9);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .video-placeholder {
+                height: 300px;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .product-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .company-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                gap: 0.5rem;
+            }
+
+            .nav-item {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .company-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">
+                Dalian Hong Xiang
+                <div class="logo-subtitle">International Trade</div>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item active" onclick="showPage('home')">
+                    <a href="#">Home</a>
+                </li>
+                <li class="nav-item" onclick="showPage('about')">
+                    <a href="#">About</a>
+                </li>
+                <li class="nav-item" onclick="showPage('products')">
+                    <a href="#">Products</a>
+                </li>
+                <li class="nav-item" onclick="showPage('contact')">
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active home-page">
+        <div class="home-content">
+            <h1>Premium Swimwear Manufacturing</h1>
+            <p class="subtitle">Quality, Innovation & Global Excellence</p>
+            
+            <div class="video-showcase">
+                <div class="video-placeholder" id="videoPlaceholder">
+                    🎬
+                    <p>YouTube Video Showcase<br>
+                    <small>Main promotional video will be displayed here</small></p>
+                </div>
+                
+                <!-- YouTube iframe will be inserted here -->
+                <iframe class="video-frame" id="youtubeFrame" 
+                        src="" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page about-page">
+        <div class="container">
+            <h2 class="page-title">About Our Company</h2>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Dalian Hong Xiang International Trade CO., LTD</h3>
+                    <p>We are a leading manufacturer and exporter of high-quality swimwear, established in Dalian, China. Our company specializes in producing premium swimwear for global markets, combining traditional craftsmanship with modern technology.</p>
+                    
+                    <p>With years of experience in the industry, we have built a reputation for excellence in quality, innovation, and customer service. Our products are exported worldwide, serving customers across different continents.</p>
+                    
+                    <p>We are committed to sustainable manufacturing practices and ensuring that every piece of swimwear meets the highest international standards.</p>
+                </div>
+                
+                <div class="about-text">
+                    <h3>Our Mission</h3>
+                    <p>To provide exceptional swimwear products that combine comfort, style, and durability while maintaining competitive pricing for our global customers.</p>
+                    
+                    <h3>Our Vision</h3>
+                    <p>To become the world's most trusted partner in swimwear manufacturing, known for innovation, quality, and reliability.</p>
+                    
+                    <h3>Core Values</h3>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                        <li>Quality Excellence</li>
+                        <li>Customer Satisfaction</li>
+                        <li>Innovation & Design</li>
+                        <li>Sustainable Practices</li>
+                        <li>Global Partnership</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="company-stats">
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Countries Served</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Designs Created</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Customer Support</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Page -->
+    <div id="products" class="page products-page">
+        <div class="container">
+            <h2 class="page-title">Our Product Range</h2>
+            
+            <div class="product-categories">
+                <div class="category-card">
+                    <div class="category-image">👙</div>
+                    <div class="category-info">
+                        <h3>Women's Bikini Collection</h3>
+                        <p>Stylish and comfortable bikinis designed for the modern woman. Available in various styles, colors, and sizes to suit different preferences and body types.</p>
+                        <ul class="features-list">
+                            <li>High-quality fabric with UV protection</li>
+                            <li>Quick-dry technology</li>
+                            <li>Chlorine resistant materials</li>
+                            <li>Customizable designs and colors</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-image">🩱</div>
+                    <div class="category-info">
+                        <h3>Women's One-Piece Swimsuits</h3>
+                        <p>Elegant one-piece swimsuits that offer both style and functionality. Perfect for swimming, water sports, or beach activities.</p>
+                        <ul class="features-list">
+                            <li>Supportive and comfortable fit</li>
+                            <li>Durable construction</li>
+                            <li>Multiple design options</li>
+                            <li>Professional and casual styles</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-image">🩲</div>
+                    <div class="category-info">
+                        <h3>Men's Swimwear</h3>
+                        <p>High-performance swim trunks and board shorts designed for men who value both comfort and style in their swimwear.</p>
+                        <ul class="features-list">
+                            <li>Moisture-wicking fabric</li>
+                            <li>Comfortable waistband</li>
+                            <li>Quick-dry technology</li>
+                            <li>Various lengths and styles</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-image">👶</div>
+                    <div class="category-info">
+                        <h3>Children's Swimwear</h3>
+                        <p>Safe and fun swimwear designed specifically for children. Made with child-friendly materials and featuring playful designs.</p>
+                        <ul class="features-list">
+                            <li>Soft and gentle materials</li>
+                            <li>Bright and colorful designs</li>
+                            <li>Safety-focused construction</li>
+                            <li>Easy to wear and remove</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-image">🏆</div>
+                    <div class="category-info">
+                        <h3>Professional & Competition</h3>
+                        <p>High-performance swimwear designed for professional athletes and competitive swimming. Engineered for speed and comfort.</p>
+                        <ul class="features-list">
+                            <li>Hydrodynamic design</li>
+                            <li>Advanced compression technology</li>
+                            <li>FINA approved materials</li>
+                            <li>Professional fit and finish</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-image">🏖️</div>
+                    <div class="category-info">
+                        <h3>Beach & Resort Wear</h3>
+                        <p>Stylish beachwear and resort collections that combine fashion with functionality for the perfect vacation wardrobe.</p>
+                        <ul class="features-list">
+                            <li>Fashionable designs</li>
+                            <li>Versatile styling options</li>
+                            <li>Comfortable all-day wear</li>
+                            <li>Coordinated accessories available</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page contact-page">
+        <div class="container">
+            <h2 class="page-title">Contact Us</h2>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="company-name">Dalian Hong Xiang International Trade CO., LTD</div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div class="contact-details">
+                            <strong>Address:</strong><br>
+                            No. 21-10 Jinhua Zhongyuan<br>
+                            Sha Hekou District, Dalian City<br>
+                            China
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <div class="contact-details">
+                            <strong>Email:</strong><br>
+                            hongxiangyz01@163.com
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        <div class="contact-details">
+                            <strong>Mobile:</strong><br>
+                            +86-15140309772
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-icon">🌐</span>
+                        <div class="contact-details">
+                            <strong>Business Hours:</strong><br>
+                            Monday - Friday: 9:00 AM - 6:00 PM (CST)<br>
+                            Saturday: 9:00 AM - 12:00 PM (CST)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 2rem;">Send us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required placeholder="Please describe your inquiry, including product types, quantities, and any specific requirements..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Page navigation system
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Find and activate the corresponding nav item
+            const navTexts = ['Home', 'About', 'Products', 'Contact'];
+            const pageIds = ['home', 'about', 'products', 'contact'];
+            const activeIndex = pageIds.indexOf(pageId);
+            if (activeIndex !== -1) {
+                navItems[activeIndex].classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Here you would typically send the data to a server
+            alert('Thank you for your message! We will contact you within 24 hours.\n\nFor urgent inquiries, please contact us directly at:\nhongxiangyz01@163.com\n+86-15140309772');
+            
+            this.reset();
+        });
+
+        // Function to load YouTube video (call this when you have the video ID)
+        function loadYouTubeVideo(videoId) {
+            const placeholder = document.getElementById('videoPlaceholder');
+            const frame = document.getElementById('youtubeFrame');
+            
+            placeholder.style.display = 'none';
+            frame.style.display = 'block';
+            frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&showinfo=0`;
+        }
+
+        // Example: Uncomment and replace 'YOUR_VIDEO_ID' when you have a YouTube video
+        // loadYouTubeVideo('YOUR_VIDEO_ID');
+
+        // Smooth scrolling for internal navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any initialization code here
+            console.log('Dalian Hong Xiang website loaded successfully!');
+        });
+    </script>
+</body>
+</html>
