@@ -53,6 +53,12 @@
             font-weight: normal;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
         .nav-menu {
             display: flex;
             list-style: none;
@@ -77,6 +83,34 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 0.3rem;
+        }
+
+        .lang-btn {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: #87ceeb;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Page System */
@@ -182,9 +216,9 @@
             display: none;
         }
 
-        /* About Page */
-        .about-page {
-            background: linear-gradient(to bottom, #f8feff, white);
+        /* Products Page */
+        .products-page {
+            background: white;
             padding: 4rem 0;
         }
 
@@ -199,64 +233,6 @@
             font-size: 3rem;
             margin-bottom: 3rem;
             color: #2c5aa0;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin-bottom: 4rem;
-        }
-
-        .about-text {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #666;
-        }
-
-        .about-text h3 {
-            color: #2c5aa0;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .company-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #2c5aa0;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        /* Products Page */
-        .products-page {
-            background: white;
-            padding: 4rem 0;
         }
 
         .product-categories {
@@ -331,6 +307,64 @@
             color: #4da6ff;
             font-weight: bold;
             margin-right: 0.5rem;
+        }
+
+        /* About Page */
+        .about-page {
+            background: linear-gradient(to bottom, #f8feff, white);
+            padding: 4rem 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .about-text h3 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .company-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
         }
 
         /* Contact Page */
@@ -439,9 +473,19 @@
             box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
         }
 
+        /* Hidden class for language switching */
+        .hidden {
+            display: none !important;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-right {
                 flex-direction: column;
                 gap: 1rem;
             }
@@ -499,37 +543,42 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="logo" onclick="showPage('home')">
-                Dalian Hong Xiang
-                <div class="logo-subtitle">International Trade</div>
+                <span data-en="Dalian Hong Xiang" data-zh="大连红翔">Dalian Hong Xiang</span>
+                <div class="logo-subtitle" data-en="International Trade" data-zh="国际贸易有限公司">International Trade</div>
             </a>
-            <ul class="nav-menu">
-                <li class="nav-item active" onclick="showPage('home')">
-                    <a href="#">Home</a>
-                </li>
-                <li class="nav-item" onclick="showPage('about')">
-                    <a href="#">About</a>
-                </li>
-                <li class="nav-item" onclick="showPage('products')">
-                    <a href="#">Products</a>
-                </li>
-                <li class="nav-item" onclick="showPage('contact')">
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li class="nav-item active" onclick="showPage('home')">
+                        <a href="#" data-en="Home" data-zh="首页">Home</a>
+                    </li>
+                    <li class="nav-item" onclick="showPage('products')">
+                        <a href="#" data-en="Products" data-zh="产品">Products</a>
+                    </li>
+                    <li class="nav-item" onclick="showPage('about')">
+                        <a href="#" data-en="About" data-zh="关于我们">About</a>
+                    </li>
+                    <li class="nav-item" onclick="showPage('contact')">
+                        <a href="#" data-en="Contact" data-zh="联系我们">Contact</a>
+                    </li>
+                </ul>
+                <div class="language-switcher">
+                    <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+                    <button class="lang-btn" onclick="switchLanguage('zh')">中文</button>
+                </div>
+            </div>
         </div>
     </nav>
 
     <!-- Home Page -->
     <div id="home" class="page active home-page">
         <div class="home-content">
-            <h1>Premium Swimwear Manufacturing</h1>
-            <p class="subtitle">Quality, Innovation & Global Excellence</p>
+            <h1 data-en="Premium Swimwear Manufacturing" data-zh="优质泳装制造">Premium Swimwear Manufacturing</h1>
+            <p class="subtitle" data-en="Quality, Innovation & Global Excellence" data-zh="品质、创新与全球卓越">Quality, Innovation & Global Excellence</p>
             
             <div class="video-showcase">
                 <div class="video-placeholder" id="videoPlaceholder">
                     🎬
-                    <p>YouTube Video Showcase<br>
-                    <small>Main promotional video will be displayed here</small></p>
+                    <p data-en="YouTube Video Showcase<br><small>Main promotional video will be displayed here</small>" data-zh="YouTube视频展示<br><small>主要宣传视频将在此处显示</small>">YouTube Video Showcase<br><small>Main promotional video will be displayed here</small></p>
                 </div>
                 
                 <!-- YouTube iframe will be inserted here -->
@@ -541,76 +590,22 @@
         </div>
     </div>
 
-    <!-- About Page -->
-    <div id="about" class="page about-page">
-        <div class="container">
-            <h2 class="page-title">About Our Company</h2>
-            
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Dalian Hong Xiang International Trade CO., LTD</h3>
-                    <p>We are a leading manufacturer and exporter of high-quality swimwear, established in Dalian, China. Our company specializes in producing premium swimwear for global markets, combining traditional craftsmanship with modern technology.</p>
-                    
-                    <p>With years of experience in the industry, we have built a reputation for excellence in quality, innovation, and customer service. Our products are exported worldwide, serving customers across different continents.</p>
-                    
-                    <p>We are committed to sustainable manufacturing practices and ensuring that every piece of swimwear meets the highest international standards.</p>
-                </div>
-                
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>To provide exceptional swimwear products that combine comfort, style, and durability while maintaining competitive pricing for our global customers.</p>
-                    
-                    <h3>Our Vision</h3>
-                    <p>To become the world's most trusted partner in swimwear manufacturing, known for innovation, quality, and reliability.</p>
-                    
-                    <h3>Core Values</h3>
-                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
-                        <li>Quality Excellence</li>
-                        <li>Customer Satisfaction</li>
-                        <li>Innovation & Design</li>
-                        <li>Sustainable Practices</li>
-                        <li>Global Partnership</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="company-stats">
-                <div class="stat-card">
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Countries Served</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">1000+</div>
-                    <div class="stat-label">Designs Created</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">Customer Support</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Products Page -->
     <div id="products" class="page products-page">
         <div class="container">
-            <h2 class="page-title">Our Product Range</h2>
+            <h2 class="page-title" data-en="Our Product Range" data-zh="我们的产品系列">Our Product Range</h2>
             
             <div class="product-categories">
                 <div class="category-card">
                     <div class="category-image">👙</div>
                     <div class="category-info">
-                        <h3>Women's Bikini Collection</h3>
-                        <p>Stylish and comfortable bikinis designed for the modern woman. Available in various styles, colors, and sizes to suit different preferences and body types.</p>
+                        <h3 data-en="Women's Bikini Collection" data-zh="女士比基尼系列">Women's Bikini Collection</h3>
+                        <p data-en="Stylish and comfortable bikinis designed for the modern woman. Available in various styles, colors, and sizes to suit different preferences and body types." data-zh="为现代女性设计的时尚舒适比基尼。提供各种款式、颜色和尺寸，适合不同喜好和体型。">Stylish and comfortable bikinis designed for the modern woman. Available in various styles, colors, and sizes to suit different preferences and body types.</p>
                         <ul class="features-list">
-                            <li>High-quality fabric with UV protection</li>
-                            <li>Quick-dry technology</li>
-                            <li>Chlorine resistant materials</li>
-                            <li>Customizable designs and colors</li>
+                            <li data-en="High-quality fabric with UV protection" data-zh="具有紫外线防护的高品质面料">High-quality fabric with UV protection</li>
+                            <li data-en="Quick-dry technology" data-zh="快干技术">Quick-dry technology</li>
+                            <li data-en="Chlorine resistant materials" data-zh="抗氯材料">Chlorine resistant materials</li>
+                            <li data-en="Customizable designs and colors" data-zh="可定制设计和颜色">Customizable designs and colors</li>
                         </ul>
                     </div>
                 </div>
@@ -618,13 +613,13 @@
                 <div class="category-card">
                     <div class="category-image">🩱</div>
                     <div class="category-info">
-                        <h3>Women's One-Piece Swimsuits</h3>
-                        <p>Elegant one-piece swimsuits that offer both style and functionality. Perfect for swimming, water sports, or beach activities.</p>
+                        <h3 data-en="Women's One-Piece Swimsuits" data-zh="女士连体泳衣">Women's One-Piece Swimsuits</h3>
+                        <p data-en="Elegant one-piece swimsuits that offer both style and functionality. Perfect for swimming, water sports, or beach activities." data-zh="优雅的连体泳衣，兼具时尚与功能性。适合游泳、水上运动或海滩活动。">Elegant one-piece swimsuits that offer both style and functionality. Perfect for swimming, water sports, or beach activities.</p>
                         <ul class="features-list">
-                            <li>Supportive and comfortable fit</li>
-                            <li>Durable construction</li>
-                            <li>Multiple design options</li>
-                            <li>Professional and casual styles</li>
+                            <li data-en="Supportive and comfortable fit" data-zh="支撑性强且舒适贴身">Supportive and comfortable fit</li>
+                            <li data-en="Durable construction" data-zh="耐用结构">Durable construction</li>
+                            <li data-en="Multiple design options" data-zh="多种设计选择">Multiple design options</li>
+                            <li data-en="Professional and casual styles" data-zh="专业和休闲款式">Professional and casual styles</li>
                         </ul>
                     </div>
                 </div>
@@ -632,13 +627,13 @@
                 <div class="category-card">
                     <div class="category-image">🩲</div>
                     <div class="category-info">
-                        <h3>Men's Swimwear</h3>
-                        <p>High-performance swim trunks and board shorts designed for men who value both comfort and style in their swimwear.</p>
+                        <h3 data-en="Men's Swimwear" data-zh="男士泳装">Men's Swimwear</h3>
+                        <p data-en="High-performance swim trunks and board shorts designed for men who value both comfort and style in their swimwear." data-zh="为重视泳装舒适性和时尚性的男士设计的高性能泳裤和冲浪短裤。">High-performance swim trunks and board shorts designed for men who value both comfort and style in their swimwear.</p>
                         <ul class="features-list">
-                            <li>Moisture-wicking fabric</li>
-                            <li>Comfortable waistband</li>
-                            <li>Quick-dry technology</li>
-                            <li>Various lengths and styles</li>
+                            <li data-en="Moisture-wicking fabric" data-zh="吸湿排汗面料">Moisture-wicking fabric</li>
+                            <li data-en="Comfortable waistband" data-zh="舒适腰带">Comfortable waistband</li>
+                            <li data-en="Quick-dry technology" data-zh="快干技术">Quick-dry technology</li>
+                            <li data-en="Various lengths and styles" data-zh="多种长度和款式">Various lengths and styles</li>
                         </ul>
                     </div>
                 </div>
@@ -646,13 +641,13 @@
                 <div class="category-card">
                     <div class="category-image">👶</div>
                     <div class="category-info">
-                        <h3>Children's Swimwear</h3>
-                        <p>Safe and fun swimwear designed specifically for children. Made with child-friendly materials and featuring playful designs.</p>
+                        <h3 data-en="Children's Swimwear" data-zh="儿童泳装">Children's Swimwear</h3>
+                        <p data-en="Safe and fun swimwear designed specifically for children. Made with child-friendly materials and featuring playful designs." data-zh="专为儿童设计的安全有趣的泳装。采用儿童友好材料，具有趣味性设计。">Safe and fun swimwear designed specifically for children. Made with child-friendly materials and featuring playful designs.</p>
                         <ul class="features-list">
-                            <li>Soft and gentle materials</li>
-                            <li>Bright and colorful designs</li>
-                            <li>Safety-focused construction</li>
-                            <li>Easy to wear and remove</li>
+                            <li data-en="Soft and gentle materials" data-zh="柔软温和的材料">Soft and gentle materials</li>
+                            <li data-en="Bright and colorful designs" data-zh="鲜艳多彩的设计">Bright and colorful designs</li>
+                            <li data-en="Safety-focused construction" data-zh="以安全为重点的结构">Safety-focused construction</li>
+                            <li data-en="Easy to wear and remove" data-zh="易于穿脱">Easy to wear and remove</li>
                         </ul>
                     </div>
                 </div>
@@ -660,13 +655,13 @@
                 <div class="category-card">
                     <div class="category-image">🏆</div>
                     <div class="category-info">
-                        <h3>Professional & Competition</h3>
-                        <p>High-performance swimwear designed for professional athletes and competitive swimming. Engineered for speed and comfort.</p>
+                        <h3 data-en="Professional & Competition" data-zh="专业竞技系列">Professional & Competition</h3>
+                        <p data-en="High-performance swimwear designed for professional athletes and competitive swimming. Engineered for speed and comfort." data-zh="为专业运动员和竞技游泳设计的高性能泳装。专为速度和舒适性而设计。">High-performance swimwear designed for professional athletes and competitive swimming. Engineered for speed and comfort.</p>
                         <ul class="features-list">
-                            <li>Hydrodynamic design</li>
-                            <li>Advanced compression technology</li>
-                            <li>FINA approved materials</li>
-                            <li>Professional fit and finish</li>
+                            <li data-en="Hydrodynamic design" data-zh="流体动力学设计">Hydrodynamic design</li>
+                            <li data-en="Advanced compression technology" data-zh="先进压缩技术">Advanced compression technology</li>
+                            <li data-en="FINA approved materials" data-zh="国际泳联认可材料">FINA approved materials</li>
+                            <li data-en="Professional fit and finish" data-zh="专业剪裁和工艺">Professional fit and finish</li>
                         </ul>
                     </div>
                 </div>
@@ -674,15 +669,69 @@
                 <div class="category-card">
                     <div class="category-image">🏖️</div>
                     <div class="category-info">
-                        <h3>Beach & Resort Wear</h3>
-                        <p>Stylish beachwear and resort collections that combine fashion with functionality for the perfect vacation wardrobe.</p>
+                        <h3 data-en="Beach & Resort Wear" data-zh="海滩度假装">Beach & Resort Wear</h3>
+                        <p data-en="Stylish beachwear and resort collections that combine fashion with functionality for the perfect vacation wardrobe." data-zh="时尚的海滩装和度假系列，将时尚与功能性完美结合，打造完美的度假衣橱。">Stylish beachwear and resort collections that combine fashion with functionality for the perfect vacation wardrobe.</p>
                         <ul class="features-list">
-                            <li>Fashionable designs</li>
-                            <li>Versatile styling options</li>
-                            <li>Comfortable all-day wear</li>
-                            <li>Coordinated accessories available</li>
+                            <li data-en="Fashionable designs" data-zh="时尚设计">Fashionable designs</li>
+                            <li data-en="Versatile styling options" data-zh="多样化造型选择">Versatile styling options</li>
+                            <li data-en="Comfortable all-day wear" data-zh="全天舒适穿着">Comfortable all-day wear</li>
+                            <li data-en="Coordinated accessories available" data-zh="配套配饰可选">Coordinated accessories available</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page about-page">
+        <div class="container">
+            <h2 class="page-title" data-en="About Our Company" data-zh="关于我们">About Our Company</h2>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3 data-en="Dalian Hong Xiang International Trade CO., LTD" data-zh="大连红翔国际贸易有限公司">Dalian Hong Xiang International Trade CO., LTD</h3>
+                    <p data-en="We are a leading manufacturer and exporter of high-quality swimwear, established in Dalian, China. Our company specializes in producing premium swimwear for global markets, combining traditional craftsmanship with modern technology." data-zh="我们是一家领先的高品质泳装制造和出口商，成立于中国大连。我们公司专门为全球市场生产优质泳装，将传统工艺与现代技术相结合。">We are a leading manufacturer and exporter of high-quality swimwear, established in Dalian, China. Our company specializes in producing premium swimwear for global markets, combining traditional craftsmanship with modern technology.</p>
+                    
+                    <p data-en="With years of experience in the industry, we have built a reputation for excellence in quality, innovation, and customer service. Our products are exported worldwide, serving customers across different continents." data-zh="凭借多年的行业经验，我们在质量、创新和客户服务方面建立了卓越的声誉。我们的产品出口到世界各地，为不同大洲的客户提供服务。">With years of experience in the industry, we have built a reputation for excellence in quality, innovation, and customer service. Our products are exported worldwide, serving customers across different continents.</p>
+                    
+                    <p data-en="We are committed to sustainable manufacturing practices and ensuring that every piece of swimwear meets the highest international standards." data-zh="我们致力于可持续的制造实践，确保每一件泳装都符合最高的国际标准。">We are committed to sustainable manufacturing practices and ensuring that every piece of swimwear meets the highest international standards.</p>
+                </div>
+                
+                <div class="about-text">
+                    <h3 data-en="Our Mission" data-zh="我们的使命">Our Mission</h3>
+                    <p data-en="To provide exceptional swimwear products that combine comfort, style, and durability while maintaining competitive pricing for our global customers." data-zh="为全球客户提供兼具舒适性、时尚性和耐用性的卓越泳装产品，同时保持有竞争力的价格。">To provide exceptional swimwear products that combine comfort, style, and durability while maintaining competitive pricing for our global customers.</p>
+                    
+                    <h3 data-en="Our Vision" data-zh="我们的愿景">Our Vision</h3>
+                    <p data-en="To become the world's most trusted partner in swimwear manufacturing, known for innovation, quality, and reliability." data-zh="成为世界上最值得信赖的泳装制造合作伙伴，以创新、质量和可靠性而闻名。">To become the world's most trusted partner in swimwear manufacturing, known for innovation, quality, and reliability.</p>
+                    
+                    <h3 data-en="Core Values" data-zh="核心价值观">Core Values</h3>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                        <li data-en="Quality Excellence" data-zh="卓越品质">Quality Excellence</li>
+                        <li data-en="Customer Satisfaction" data-zh="客户满意">Customer Satisfaction</li>
+                        <li data-en="Innovation & Design" data-zh="创新设计">Innovation & Design</li>
+                        <li data-en="Sustainable Practices" data-zh="可持续发展">Sustainable Practices</li>
+                        <li data-en="Global Partnership" data-zh="全球合作">Global Partnership</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="company-stats">
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label" data-en="Years Experience" data-zh="年经验">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label" data-en="Countries Served" data-zh="服务国家">Countries Served</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label" data-en="Designs Created" data-zh="设计创造">Designs Created</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label" data-en="Customer Support" data-zh="客户支持">Customer Support</div>
                 </div>
             </div>
         </div>
@@ -691,26 +740,24 @@
     <!-- Contact Page -->
     <div id="contact" class="page contact-page">
         <div class="container">
-            <h2 class="page-title">Contact Us</h2>
+            <h2 class="page-title" data-en="Contact Us" data-zh="联系我们">Contact Us</h2>
             
             <div class="contact-content">
                 <div class="contact-info">
-                    <div class="company-name">Dalian Hong Xiang International Trade CO., LTD</div>
+                    <div class="company-name" data-en="Dalian Hong Xiang International Trade CO., LTD" data-zh="大连红翔国际贸易有限公司">Dalian Hong Xiang International Trade CO., LTD</div>
                     
                     <div class="contact-item">
                         <span class="contact-icon">📍</span>
                         <div class="contact-details">
-                            <strong>Address:</strong><br>
-                            No. 21-10 Jinhua Zhongyuan<br>
-                            Sha Hekou District, Dalian City<br>
-                            China
+                            <strong data-en="Address:" data-zh="地址：">Address:</strong><br>
+                            <span data-en="No. 21-10 Jinhua Zhongyuan<br>Sha Hekou District, Dalian City<br>China" data-zh="中国大连市沙河口区<br>金华中园21-10号">No. 21-10 Jinhua Zhongyuan<br>Sha Hekou District, Dalian City<br>China</span>
                         </div>
                     </div>
                     
                     <div class="contact-item">
                         <span class="contact-icon">📧</span>
                         <div class="contact-details">
-                            <strong>Email:</strong><br>
+                            <strong data-en="Email:" data-zh="邮箱：">Email:</strong><br>
                             hongxiangyz01@163.com
                         </div>
                     </div>
@@ -718,7 +765,7 @@
                     <div class="contact-item">
                         <span class="contact-icon">📱</span>
                         <div class="contact-details">
-                            <strong>Mobile:</strong><br>
+                            <strong data-en="Mobile:" data-zh="手机：">Mobile:</strong><br>
                             +86-15140309772
                         </div>
                     </div>
@@ -726,42 +773,41 @@
                     <div class="contact-item">
                         <span class="contact-icon">🌐</span>
                         <div class="contact-details">
-                            <strong>Business Hours:</strong><br>
-                            Monday - Friday: 9:00 AM - 6:00 PM (CST)<br>
-                            Saturday: 9:00 AM - 12:00 PM (CST)
+                            <strong data-en="Business Hours:" data-zh="营业时间：">Business Hours:</strong><br>
+                            <span data-en="Monday - Friday: 9:00 AM - 6:00 PM (CST)<br>Saturday: 9:00 AM - 12:00 PM (CST)" data-zh="周一至周五：上午9:00 - 下午6:00 (CST)<br>周六：上午9:00 - 下午12:00 (CST)">Monday - Friday: 9:00 AM - 6:00 PM (CST)<br>Saturday: 9:00 AM - 12:00 PM (CST)</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="contact-form">
-                    <h3 style="margin-bottom: 2rem;">Send us a Message</h3>
+                    <h3 style="margin-bottom: 2rem;" data-en="Send us a Message" data-zh="发送消息">Send us a Message</h3>
                     <form id="contactForm">
                         <div class="form-group">
-                            <label for="name">Full Name *</label>
+                            <label for="name" data-en="Full Name *" data-zh="姓名 *">Full Name *</label>
                             <input type="text" id="name" name="name" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">Email Address *</label>
+                            <label for="email" data-en="Email Address *" data-zh="邮箱地址 *">Email Address *</label>
                             <input type="email" id="email" name="email" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="company">Company Name</label>
+                            <label for="company" data-en="Company Name" data-zh="公司名称">Company Name</label>
                             <input type="text" id="company" name="company">
                         </div>
                         
                         <div class="form-group">
-                            <label for="subject">Subject *</label>
+                            <label for="subject" data-en="Subject *" data-zh="主题 *">Subject *</label>
                             <input type="text" id="subject" name="subject" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="message">Message *</label>
-                            <textarea id="message" name="message" required placeholder="Please describe your inquiry, including product types, quantities, and any specific requirements..."></textarea>
+                            <label for="message" data-en="Message *" data-zh="消息 *">Message *</label>
+                            <textarea id="message" name="message" required data-en="Please describe your inquiry, including product types, quantities, and any specific requirements..." data-zh="请描述您的询问，包括产品类型、数量和任何具体要求..." placeholder="Please describe your inquiry, including product types, quantities, and any specific requirements..."></textarea>
                         </div>
                         
-                        <button type="submit" class="btn">Send Message</button>
+                        <button type="submit" class="btn" data-en="Send Message" data-zh="发送消息">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -769,6 +815,8 @@
     </div>
 
     <script>
+        let currentLanguage = 'en';
+
         // Page navigation system
         function showPage(pageId) {
             // Hide all pages
@@ -787,8 +835,7 @@
             });
             
             // Find and activate the corresponding nav item
-            const navTexts = ['Home', 'About', 'Products', 'Contact'];
-            const pageIds = ['home', 'about', 'products', 'contact'];
+            const pageIds = ['home', 'products', 'about', 'contact'];
             const activeIndex = pageIds.indexOf(pageId);
             if (activeIndex !== -1) {
                 navItems[activeIndex].classList.add('active');
@@ -798,6 +845,53 @@
             window.scrollTo(0, 0);
         }
 
+        // Language switching system
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update language buttons
+            const langButtons = document.querySelectorAll('.lang-btn');
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[onclick="switchLanguage('${lang}')"]`).classList.add('active');
+            
+            // Update all text elements
+            const elements = document.querySelectorAll('[data-en][data-zh]');
+            elements.forEach(element => {
+                if (lang === 'en') {
+                    element.textContent = element.getAttribute('data-en');
+                } else {
+                    element.textContent = element.getAttribute('data-zh');
+                }
+            });
+            
+            // Update HTML elements with innerHTML content
+            const htmlElements = document.querySelectorAll('[data-en*="<"][data-zh*="<"]');
+            htmlElements.forEach(element => {
+                if (lang === 'en') {
+                    element.innerHTML = element.getAttribute('data-en');
+                } else {
+                    element.innerHTML = element.getAttribute('data-zh');
+                }
+            });
+            
+            // Update placeholder text
+            const textarea = document.getElementById('message');
+            if (textarea) {
+                if (lang === 'en') {
+                    textarea.placeholder = textarea.getAttribute('data-en');
+                } else {
+                    textarea.placeholder = textarea.getAttribute('data-zh');
+                }
+            }
+            
+            // Update document title
+            if (lang === 'en') {
+                document.title = 'Dalian Hong Xiang International Trade - Swimwear Manufacturer';
+            } else {
+                document.title = '大连红翔国际贸易有限公司 - 泳装制造商';
+            }
+        }
+
         // Form submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -805,9 +899,14 @@
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
             
-            // Here you would typically send the data to a server
-            alert('Thank you for your message! We will contact you within 24 hours.\n\nFor urgent inquiries, please contact us directly at:\nhongxiangyz01@163.com\n+86-15140309772');
+            let alertMessage;
+            if (currentLanguage === 'en') {
+                alertMessage = 'Thank you for your message! We will contact you within 24 hours.\n\nFor urgent inquiries, please contact us directly at:\nhongxiangyz01@163.com\n+86-15140309772';
+            } else {
+                alertMessage = '感谢您的留言！我们将在24小时内与您联系。\n\n如有紧急询问，请直接联系我们：\nhongxiangyz01@163.com\n+86-15140309772';
+            }
             
+            alert(alertMessage);
             this.reset();
         });
 
@@ -824,9 +923,9 @@
         // Example: Uncomment and replace 'YOUR_VIDEO_ID' when you have a YouTube video
         // loadYouTubeVideo('YOUR_VIDEO_ID');
 
-        // Smooth scrolling for internal navigation
+        // Initialize language on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Add any initialization code here
+            switchLanguage('en'); // Default to English
             console.log('Dalian Hong Xiang website loaded successfully!');
         });
     </script>
